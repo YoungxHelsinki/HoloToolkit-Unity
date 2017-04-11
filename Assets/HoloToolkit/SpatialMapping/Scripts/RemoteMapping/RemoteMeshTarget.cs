@@ -106,6 +106,11 @@ namespace HoloToolkit.Unity.SpatialMapping
                         AddSurfaceObject(surface);
                     }
 
+                    // SEYOUNG CUSTOM
+                    // SAVE AS FILE
+                    MeshFileName = DateTime.Now.ToString("h:mm:ss tt");
+                    MeshSaver.Save(MeshFileName, meshes); 
+
                     // Finally disconnect.
                     clientConnected = false;
                     networkClient.Close();
