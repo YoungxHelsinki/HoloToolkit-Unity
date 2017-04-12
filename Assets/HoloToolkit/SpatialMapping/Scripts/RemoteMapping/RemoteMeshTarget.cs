@@ -109,7 +109,8 @@ namespace HoloToolkit.Unity.SpatialMapping
                     // SEYOUNG CUSTOM
                     // SAVE AS FILE
                     String MeshFileName = DateTime.Now.ToString("h:mm:ss tt");
-                    MeshSaver.Save(MeshFileName, meshes); 
+                    // MeshSaver.Save(MeshFileName, meshes); 
+                    MeshToObjExporter.MeshToFile(meshes, MeshFileName);
 
                     // Finally disconnect.
                     clientConnected = false;
