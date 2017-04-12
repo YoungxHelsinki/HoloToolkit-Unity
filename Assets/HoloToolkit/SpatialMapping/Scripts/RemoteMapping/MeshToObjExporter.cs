@@ -132,5 +132,27 @@ namespace HoloToolkit.Unity.SpatialMapping
             }
 
     }
+
+       public static void WriteLog(string content, string filename) {
+            string folderName = MeshSaver.MeshFolderName;
+
+            string path = Path.Combine(folderName, filename + ".txt");
+            FileStream fs = null;
+            try
+            {
+                fs = new FileStream(path, FileMode.CreateNew);
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+
+                    sw.Write(content);
+                }
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Dispose();
+            }
+
+    }
 }
 }

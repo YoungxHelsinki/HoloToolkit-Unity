@@ -108,15 +108,18 @@ namespace HoloToolkit.Unity.SpatialMapping
 
                     // SEYOUNG CUSTOM
                     // SAVE AS FILE
-                    String MeshFileName = DateTime.Now.ToString("h:mm:ss tt");
-                    for (int index = 0; index < meshes.Count; index++){
+                    // String MeshFileName = DateTime.Now.ToString("h:mm:ss tt");
+                    // String MeshFileName = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    // String content = meshes.Count.ToString();
+                    // MeshToObjExporter.WriteLog(content, MeshFileName);
+                    // for (int index = 0; index < meshes.Count; index++){
                         
-                        // MeshSaver.Save(MeshFileName, meshes); 
-                        MeshToObjExporter.MeshToFile(meshes[index], 
-                            String.Format(MeshFileName+"-{0}", index)
-                            );
+                    //     // MeshSaver.Save(MeshFileName, meshes); 
+                    //     MeshToObjExporter.MeshToFile(meshes[index], 
+                    //         String.Format(MeshFileName+"-{0}", index)
+                    //         );
 
-                    }
+                    // }
                     
                     // Finally disconnect.
                     clientConnected = false;
