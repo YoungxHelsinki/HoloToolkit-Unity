@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Collections;
 using System.IO;
 using System.Text;
+using System.CodeDom;
 
 namespace HoloToolkit.Unity.SpatialMapping
 {
@@ -48,12 +49,88 @@ namespace HoloToolkit.Unity.SpatialMapping
         }
         return sb.ToString();
     }
+
+    public static string MeshToString(Mesh m) {
+        
+        StringBuilder sb = new StringBuilder();
  
-    public static void MeshToFile(MeshFilter mf, string filename) {
-        using (StreamWriter sw = new StreamWriter(filename)) 
-        {
-            sw.Write(MeshToString(mf));
+        foreach(Vector3 v in m.vertices) {
+            sb.Append(string.Format("v {0} {1} {2}\n",v.x,v.y,v.z));
         }
+        sb.Append("\n");
+        foreach(Vector3 v in m.normals) {
+            sb.Append(string.Format("vn {0} {1} {2}\n",v.x,v.y,v.z));
+        }
+        sb.Append("\n");
+        foreach(Vector3 v in m.uv) {
+            sb.Append(string.Format("vt {0} {1}\n",v.x,v.y));
+        }
+        for (int material=0; material < m.subMeshCount; material ++) {
+            
+            int[] triangles = m.GetTriangles(material);
+            for (int i=0;i<triangles.Length;i+=3) {
+                sb.Append(string.Format("f {0}/{0}/{0} {1}/{1}/{1} {2}/{2}/{2}\n", 
+                    triangles[i]+1, triangles[i+1]+1, triangles[i+2]+1));
+            }
+        }
+        return sb.ToString();
+    }
+        /*
+        private static string ToLiteral(string input)
+        {
+            using (var writer = new StringWriter())
+            {
+                using (var provider = CodeDomProvider.CreateProvider("CSharp"))
+                {
+                    provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
+                    return writer.ToString();
+                }
+            }
+        }
+        */
+
+        public static void MeshToFile(Mesh m, string filename) {
+            string folderName = MeshSaver.MeshFolderName;
+
+            string path = Path.Combine(folderName, filename + ".obj");
+            FileStream fs = null;
+            try
+            {
+                fs = new FileStream(path, FileMode.CreateNew);
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+
+                    sw.Write(MeshToString(m));
+                }
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Dispose();
+            }
+
+    }
+
+        public static void MeshToFile(MeshFilter mf, string filename) {
+            string folderName = MeshSaver.MeshFolderName;
+
+            string path = Path.Combine(folderName, filename + ".obj");
+            FileStream fs = null;
+            try
+            {
+                fs = new FileStream(path, FileMode.CreateNew);
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+
+                    sw.Write(MeshToString(mf));
+                }
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Dispose();
+            }
+
     }
 }
 }
