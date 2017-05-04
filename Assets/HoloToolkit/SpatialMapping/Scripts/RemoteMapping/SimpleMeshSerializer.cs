@@ -109,10 +109,12 @@ namespace HoloToolkit.Unity.SpatialMapping
         private static void WriteMesh(BinaryWriter writer, Mesh mesh, Transform transform = null)
         {
             SysDiag.Debug.Assert(writer != null);
-
+            mesh.RecalculateNormals();
             // Write the mesh data.
+            //WriteMeshHeader(writer, mesh.vertexCount, mesh.triangles.Length, mesh.normals.Length);
             WriteMeshHeader(writer, mesh.vertexCount, mesh.triangles.Length);
             WriteVertices(writer, mesh.vertices, transform);
+            //WriteVertices(writer, mesh.normals, transform);
             WriteTriangleIndicies(writer, mesh.triangles);
         }
 
@@ -158,6 +160,18 @@ namespace HoloToolkit.Unity.SpatialMapping
 
         }
 
+        private static void WriteMeshHeader(BinaryWriter writer, int vertexCount, int triangleIndexCount, int normalCount)
+        {
+            SysDiag.Debug.Assert(writer != null);
+
+            writer.Write(vertexCount);
+            writer.Write(normalCount);
+
+            writer.Write(triangleIndexCount);
+            Debug.Log(System.String.Format("vertexCount: {0}\nnormal: {1}\nfaces: {2}", vertexCount, normalCount, triangleIndexCount));
+
+        }
+
         /// <summary>
         /// Reads a mesh header from the data stream.
         /// </summary>
@@ -181,7 +195,8 @@ namespace HoloToolkit.Unity.SpatialMapping
         private static void WriteVertices(BinaryWriter writer, Vector3[] vertices, Transform transform = null)
         {
             SysDiag.Debug.Assert(writer != null);
-
+            Debug.Log(vertices);
+            string debugLine = "";
             if (transform != null)
             {
                 for (int v = 0, vLength = vertices.Length; v < vLength; ++v)
@@ -199,8 +214,40 @@ namespace HoloToolkit.Unity.SpatialMapping
                     writer.Write(vertex.x);
                     writer.Write(vertex.y);
                     writer.Write(vertex.z);
+                    //Debug.Log(System.String.Format("{0}    {1}    {2}", vertex.x, vertex.y, vertex.z));
+                    debugLine += System.String.Format("{0}    {1}    {2}\n", vertex.x, vertex.y, vertex.z);
                 }
             }
+            Debug.Log(debugLine);
+        }
+
+        private static void WriteNormals(BinaryWriter writer, Vector3[] vertices, Transform transform = null)
+        {
+            SysDiag.Debug.Assert(writer != null);
+            Debug.Log(System.String.Format("Normals len("));
+            string debugLine = "";
+            if (transform != null)
+            {
+                for (int v = 0, vLength = vertices.Length; v < vLength; ++v)
+                {
+                    Vector3 vertex = transform.TransformPoint(vertices[v]);
+                    writer.Write(vertex.x);
+                    writer.Write(vertex.y);
+                    writer.Write(vertex.z);
+                }
+            }
+            else
+            {
+                foreach (Vector3 vertex in vertices)
+                {
+                    writer.Write(vertex.x);
+                    writer.Write(vertex.y);
+                    writer.Write(vertex.z);
+                    //Debug.Log(System.String.Format("{0}    {1}    {2}", vertex.x, vertex.y, vertex.z));
+                    debugLine += System.String.Format("{0}    {1}    {2}\n", vertex.x, vertex.y, vertex.z);
+                }
+            }
+            Debug.Log(debugLine);
         }
 
         /// <summary>
@@ -233,11 +280,20 @@ namespace HoloToolkit.Unity.SpatialMapping
         private static void WriteTriangleIndicies(BinaryWriter writer, int[] triangleIndices)
         {
             SysDiag.Debug.Assert(writer != null);
-
+            Debug.Log(triangleIndices);
+            int i = 0;
+            string debugLine = "";
             foreach (int index in triangleIndices)
             {
                 writer.Write(index);
+                if (i % 3 == 0) {
+                    debugLine += "\n";
+                }
+                
+                debugLine += System.String.Format("{0} ", index);
+                i += 1;
             }
+            Debug.Log(debugLine);
         }
 
         /// <summary>

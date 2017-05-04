@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿ // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -129,6 +129,9 @@ namespace HoloToolkit.Unity.SpatialMapping
             IAsyncAction outstandingAction = networkConnection.ConnectAsync(networkHost, ConnectionPort.ToString());
             AsyncActionCompletedHandler aach = new AsyncActionCompletedHandler(NetworkConnectedHandler);
             outstandingAction.Completed = aach;
+
+            // SEYOUNG
+            // SpatialMappingManager.Instance.CleanupObserver();
         }
 
         /// <summary>
@@ -149,7 +152,7 @@ namespace HoloToolkit.Unity.SpatialMapping
                 {
                     // Write how much data we are sending.
                     networkDataWriter.WriteInt32(nextDataBufferToSend.Length);
-
+                    Debug.Log(System.String.Format("Buffer length: {0}", nextDataBufferToSend.Length));
                     // Then write the data.
                     networkDataWriter.WriteBytes(nextDataBufferToSend);
 
