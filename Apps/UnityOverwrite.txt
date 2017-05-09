@@ -9,7 +9,7 @@ HoloToolkit-Unity.sln: modified
 GeneratedProjects\UWP\Assembly-CSharp\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1
 GeneratedProjects\UWP\Assembly-CSharp-firstpass\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1
 HoloToolkit-Unity\App.cs: CA8CF37573F304BDFAF666D2A33F4944
-HoloToolkit-Unity\HoloToolkit-Unity.csproj: D991D23A6E37060393B15E830E52786A
+HoloToolkit-Unity\HoloToolkit-Unity.csproj: BB2545230B216506A2D03155F7D827F5
 HoloToolkit-Unity\HoloToolkit-Unity.csproj.user: modified
 HoloToolkit-Unity\Package.appxmanifest: 3213F23173095440378647CF41618016
 HoloToolkit-Unity\project.json: 1D02BC64BAC0D041019673A1C4C51737

@@ -39,6 +39,9 @@ namespace HoloToolkit.Unity.SpatialMapping
         [Tooltip("How long to wait (in sec) between Spatial Mapping updates.")]
         public float TimeBetweenUpdates = 3.5f;
 
+        [Tooltip("How long to wait (in sec) at the start of the app")]
+        public float TimeBeforeStartMapping = 3.5f;
+
         /// <summary>
         /// Indicates the current state of the Surface Observer.
         /// </summary>
@@ -73,11 +76,20 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// </summary>
         private float updateTime;
 
+        private float awakeTime;
+
         protected override void Awake()
         {
             base.Awake();
 
             ObserverState = ObserverStates.Stopped;
+
+            awakeTime = Time.unscaledTime;
+        }
+
+        private bool IsReadyForStart()
+        {
+            return Time.unscaledTime - awakeTime > TimeBeforeStartMapping;
         }
 
         /// <summary>
@@ -87,6 +99,10 @@ namespace HoloToolkit.Unity.SpatialMapping
         {
             if ((ObserverState == ObserverStates.Running) && (outstandingMeshRequest == null))
             {
+                //if (!IsReadyForStart())
+                //{
+                //    surfaceWorkQueue.Clear();
+                //}
                 if (surfaceWorkQueue.Count > 0)
                 {
                     // We're using a simple first-in-first-out rule for requesting meshes, but a more sophisticated algorithm could prioritize
@@ -166,6 +182,8 @@ namespace HoloToolkit.Unity.SpatialMapping
             if (observer == null)
             {
                 observer = new SurfaceObserver();
+                //Vector3 sceneOrigin = Camera.main.transform.position;
+                //observer.SetVolumeAsAxisAlignedBox(sceneOrigin, Extents);
                 observer.SetVolumeAsAxisAlignedBox(Vector3.zero, Extents);
             }
 
@@ -220,6 +238,11 @@ namespace HoloToolkit.Unity.SpatialMapping
                 spareSurfaceObject = null;
             }
 
+            Cleanup();
+        }
+
+        internal void DummyCleanup()
+        {
             Cleanup();
         }
 
@@ -319,11 +342,15 @@ namespace HoloToolkit.Unity.SpatialMapping
             switch (changeType)
             {
                 case SurfaceChange.Added:
+                    Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    ADDED id: {0}", id));
+                    break;
                 case SurfaceChange.Updated:
                     surfaceWorkQueue.Enqueue(id);
+                    Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    UPDATED id: {0}", id));
                     break;
 
                 case SurfaceChange.Removed:
+                    Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    REMOVED id: {0}", id));
                     SurfaceObject? removedSurface = RemoveSurfaceIfFound(id.handle, destroyGameObject: false);
                     if (removedSurface != null)
                     {

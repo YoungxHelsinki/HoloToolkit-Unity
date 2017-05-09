@@ -133,12 +133,12 @@ Prefab:
     - target: {fileID: 114000013950815180, guid: 5e76e513cfbb87a4285cfa0abb05afbd,
         type: 2}
       propertyPath: ServerIP
-      value: 10.100.27.202
+      value: 10.100.52.93
       objectReference: {fileID: 0}
     - target: {fileID: 114000010791004466, guid: 5e76e513cfbb87a4285cfa0abb05afbd,
         type: 2}
       propertyPath: ServerIP
-      value: 10.100.27.202
+      value: 10.100.52.93
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e76e513cfbb87a4285cfa0abb05afbd, type: 2}

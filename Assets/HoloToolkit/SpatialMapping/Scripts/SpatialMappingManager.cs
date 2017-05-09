@@ -240,6 +240,14 @@ namespace HoloToolkit.Unity.SpatialMapping
         }
 
         /// <summary>
+        /// Instructs the SurfaceObserver to stop and cleanup all meshes.
+        /// </summary>
+        public void Cleanup()
+        {
+            surfaceObserver.DummyCleanup();
+        }
+
+        /// <summary>
         /// Gets all meshes that are associated with the SpatialMapping mesh.
         /// </summary>
         /// <returns>

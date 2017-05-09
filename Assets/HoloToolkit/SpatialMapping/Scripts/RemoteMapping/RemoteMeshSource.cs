@@ -131,7 +131,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             outstandingAction.Completed = aach;
 
             // SEYOUNG
-            // SpatialMappingManager.Instance.CleanupObserver();
+            SpatialMappingManager.Instance.Cleanup();
         }
 
         /// <summary>
