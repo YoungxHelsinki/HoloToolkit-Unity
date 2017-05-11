@@ -40,7 +40,11 @@ namespace HoloToolkit.Unity.SpatialMapping
         public float TimeBetweenUpdates = 3.5f;
 
         [Tooltip("How long to wait (in sec) at the start of the app")]
-        public float TimeBeforeStartMapping = 3.5f;
+        public float TimeBeforeStartMapping = 5.0f;
+
+        public int surfaceAddCount = 0;
+        public int surfaceUpdateCount = 0;
+        public int surfaceRemoveCount = 0;
 
         /// <summary>
         /// Indicates the current state of the Surface Observer.
@@ -241,9 +245,13 @@ namespace HoloToolkit.Unity.SpatialMapping
             Cleanup();
         }
 
-        internal void DummyCleanup()
+        internal void CleanupPartiallyAfterSend()
         {
-            Cleanup();
+            Debug.Log(System.String.Format("ADDED: {0}\t UPDATED: {1}\t REMOVED : {2} ", surfaceAddCount, surfaceUpdateCount, surfaceRemoveCount));
+            CleanupAfterSend();
+            surfaceAddCount = 0;
+            surfaceUpdateCount = 0;
+            surfaceRemoveCount = 0;
         }
 
         /// <summary>
@@ -342,15 +350,18 @@ namespace HoloToolkit.Unity.SpatialMapping
             switch (changeType)
             {
                 case SurfaceChange.Added:
-                    Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    ADDED id: {0}", id));
+                    //Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    ADDED id: {0}", id));
+                    surfaceAddCount += 1;
                     break;
                 case SurfaceChange.Updated:
-                    surfaceWorkQueue.Enqueue(id);
-                    Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    UPDATED id: {0}", id));
+                    //surfaceWorkQueue.Enqueue(id);
+                    //Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    UPDATED id: {0}", id));
+                    surfaceUpdateCount += 1;
                     break;
 
                 case SurfaceChange.Removed:
-                    Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    REMOVED id: {0}", id));
+                    //Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    REMOVED id: {0}", id));
+                    surfaceRemoveCount += 1;
                     SurfaceObject? removedSurface = RemoveSurfaceIfFound(id.handle, destroyGameObject: false);
                     if (removedSurface != null)
                     {

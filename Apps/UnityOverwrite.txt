@@ -8,8 +8,8 @@
 HoloToolkit-Unity.sln: modified
 GeneratedProjects\UWP\Assembly-CSharp\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1
 GeneratedProjects\UWP\Assembly-CSharp-firstpass\project.json: 4FCF72A4D5EDB37E24C206A7BCFE7AF1
-HoloToolkit-Unity\App.cs: CA8CF37573F304BDFAF666D2A33F4944
-HoloToolkit-Unity\HoloToolkit-Unity.csproj: BB2545230B216506A2D03155F7D827F5
+HoloToolkit-Unity\App.cs: modified
+HoloToolkit-Unity\HoloToolkit-Unity.csproj: modified
 HoloToolkit-Unity\HoloToolkit-Unity.csproj.user: modified
 HoloToolkit-Unity\Package.appxmanifest: 3213F23173095440378647CF41618016
 HoloToolkit-Unity\project.json: 1D02BC64BAC0D041019673A1C4C51737
@@ -19,5 +19,5 @@ HoloToolkit-Unity\Assets\Square44x44Logo.scale-200.png: 6C6EF27184ABE9D870A9D564
 HoloToolkit-Unity\Assets\Square44x44Logo.targetsize-24_altform-unplated.png: 156637F7B5363E983E7A46D8E533A23D
 HoloToolkit-Unity\Assets\StoreLogo.png: 90BD194CA4A7CFFF3E8B8222229857FB
 HoloToolkit-Unity\Assets\Wide310x150Logo.scale-200.png: C96846A80DF667F87355569CD816192D
-HoloToolkit-Unity\Properties\AssemblyInfo.cs: 331FC604899F8E51FC8C2FC2B4EF687F
+HoloToolkit-Unity\Properties\AssemblyInfo.cs: modified
 HoloToolkit-Unity\Properties\Default.rd.xml: 72EB282657164E79A1C42F6240984826

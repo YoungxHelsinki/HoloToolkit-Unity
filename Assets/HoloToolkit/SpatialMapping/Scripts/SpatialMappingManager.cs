@@ -244,7 +244,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// </summary>
         public void Cleanup()
         {
-            surfaceObserver.DummyCleanup();
+            surfaceObserver.CleanupPartiallyAfterSend();
         }
 
         /// <summary>

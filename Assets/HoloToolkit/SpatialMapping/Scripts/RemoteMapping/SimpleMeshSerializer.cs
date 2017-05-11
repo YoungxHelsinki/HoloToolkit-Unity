@@ -195,7 +195,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         private static void WriteVertices(BinaryWriter writer, Vector3[] vertices, Transform transform = null)
         {
             SysDiag.Debug.Assert(writer != null);
-            Debug.Log(vertices);
+            //Debug.Log(vertices);
             string debugLine = "";
             if (transform != null)
             {
@@ -215,10 +215,10 @@ namespace HoloToolkit.Unity.SpatialMapping
                     writer.Write(vertex.y);
                     writer.Write(vertex.z);
                     //Debug.Log(System.String.Format("{0}    {1}    {2}", vertex.x, vertex.y, vertex.z));
-                    debugLine += System.String.Format("{0}    {1}    {2}\n", vertex.x, vertex.y, vertex.z);
+                    //debugLine += System.String.Format("{0}    {1}    {2}\n", vertex.x, vertex.y, vertex.z);
                 }
             }
-            Debug.Log(debugLine);
+            //Debug.Log(debugLine);
         }
 
         private static void WriteNormals(BinaryWriter writer, Vector3[] vertices, Transform transform = null)
@@ -244,10 +244,10 @@ namespace HoloToolkit.Unity.SpatialMapping
                     writer.Write(vertex.y);
                     writer.Write(vertex.z);
                     //Debug.Log(System.String.Format("{0}    {1}    {2}", vertex.x, vertex.y, vertex.z));
-                    debugLine += System.String.Format("{0}    {1}    {2}\n", vertex.x, vertex.y, vertex.z);
+                    //debugLine += System.String.Format("{0}    {1}    {2}\n", vertex.x, vertex.y, vertex.z);
                 }
             }
-            Debug.Log(debugLine);
+            //Debug.Log(debugLine);
         }
 
         /// <summary>
@@ -280,7 +280,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         private static void WriteTriangleIndicies(BinaryWriter writer, int[] triangleIndices)
         {
             SysDiag.Debug.Assert(writer != null);
-            Debug.Log(triangleIndices);
+            //Debug.Log(triangleIndices);
             int i = 0;
             string debugLine = "";
             foreach (int index in triangleIndices)
@@ -290,10 +290,10 @@ namespace HoloToolkit.Unity.SpatialMapping
                     debugLine += "\n";
                 }
                 
-                debugLine += System.String.Format("{0} ", index);
+                //debugLine += System.String.Format("{0} ", index);
                 i += 1;
             }
-            Debug.Log(debugLine);
+            //Debug.Log(debugLine);
         }
 
         /// <summary>

@@ -283,9 +283,52 @@ namespace HoloToolkit.Unity.SpatialMapping
             for (int index = 0; index < surfaceObjectsWriteable.Count; index++)
             {
                 CleanUpSurface(surfaceObjectsWriteable[index], destroyGameObjects, destroyMeshes);
+                
             }
             surfaceObjectsWriteable.Clear();
         }
+
+
+
+        /// <summary>
+        /// Cleans up references to objects that we have created.
+        /// </summary>
+        /// <param name="destroyGameObjects">True to destroy the game objects of each surface, false otherwise.</param>
+        /// <param name="destroyMeshes">True to destroy the meshes of each surface, false otherwise.</param>
+        protected void CleanupAfterSend(bool destroyGameObjects = true, bool destroyMeshes = true)
+        {
+            var deleteAmount = 3;
+            if (surfaceObjectsWriteable.Count < deleteAmount)
+            {
+                //Debug.Log(System.String.Format("Not enough surfaces. {0} surfaces", surfaceObjectsWriteable.Count));
+                return;
+            }
+
+            var handlers = SurfaceRemoved;
+            
+            //var handlers = RemovingAllSurfaces;
+            //if (handlers != null)
+            //{
+            //    handlers(this, EventArgs.Empty);
+            //}
+
+            var count = surfaceObjectsWriteable.Count - deleteAmount;
+            Debug.Log(System.String.Format("{0} surfaces. DELETE {1} surfaces", surfaceObjectsWriteable.Count, count));
+            for (int index = 0; index < count; index++)
+            {
+                SurfaceObject surface = surfaceObjectsWriteable[index];
+                if (handlers != null)
+                {
+                    handlers(this, DataEventArgs.Create(surface));
+                }
+                CleanUpSurface(surface, destroyGameObjects, destroyMeshes);
+
+            }
+            //surfaceObjectsWriteable.Clear();
+            /// Remove deleted
+            surfaceObjectsWriteable.RemoveRange(0, count);
+        }
+
 
         /// <summary>
         /// Gets all mesh filters that have a valid mesh.
