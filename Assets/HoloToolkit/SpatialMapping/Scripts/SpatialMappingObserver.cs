@@ -349,12 +349,14 @@ namespace HoloToolkit.Unity.SpatialMapping
 
             switch (changeType)
             {
+                /// Interestingly, surface is pushed to queue only when it's updated but not added.
+                
                 case SurfaceChange.Added:
                     //Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    ADDED id: {0}", id));
                     surfaceAddCount += 1;
                     break;
                 case SurfaceChange.Updated:
-                    //surfaceWorkQueue.Enqueue(id);
+                    surfaceWorkQueue.Enqueue(id);
                     //Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    UPDATED id: {0}", id));
                     surfaceUpdateCount += 1;
                     break;

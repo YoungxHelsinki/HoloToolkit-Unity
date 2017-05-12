@@ -130,8 +130,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             AsyncActionCompletedHandler aach = new AsyncActionCompletedHandler(NetworkConnectedHandler);
             outstandingAction.Completed = aach;
 
-            // SEYOUNG
-            SpatialMappingManager.Instance.Cleanup();
+            
         }
 
         /// <summary>

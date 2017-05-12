@@ -112,6 +112,9 @@ namespace HoloToolkit.Unity.SpatialMapping
                 byte[] serialized = SimpleMeshSerializer.Serialize(meshesToSend);
                 RemoteMeshSource.Instance.SendData(serialized);
             }
+
+            // SEYOUNG
+            SpatialMappingManager.Instance.Cleanup();
 #endif
         }
     }
