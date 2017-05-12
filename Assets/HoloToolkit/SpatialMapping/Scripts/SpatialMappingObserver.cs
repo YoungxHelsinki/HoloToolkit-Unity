@@ -362,7 +362,7 @@ namespace HoloToolkit.Unity.SpatialMapping
                     break;
 
                 case SurfaceChange.Removed:
-                    //Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    REMOVED id: {0}", id));
+                    Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    REMOVED id: {0}", id));
                     surfaceRemoveCount += 1;
                     SurfaceObject? removedSurface = RemoveSurfaceIfFound(id.handle, destroyGameObject: false);
                     if (removedSurface != null)
