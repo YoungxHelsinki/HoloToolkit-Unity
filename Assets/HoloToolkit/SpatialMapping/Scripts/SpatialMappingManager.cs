@@ -36,6 +36,8 @@ namespace HoloToolkit.Unity.SpatialMapping
         [SerializeField]
         private bool castShadows = false;
 
+        public List<int> obsoleteSurfaceIds = new List<int>();
+
         /// <summary>
         /// Used for gathering real-time Spatial Mapping data on the HoloLens.
         /// </summary>
@@ -331,5 +333,13 @@ namespace HoloToolkit.Unity.SpatialMapping
                 }
             }
         }
+
+        public bool isSurfaceNearCamera(Bounds bounds, float radius = 0.5F)
+        {
+            var distance = Vector3.Distance(bounds.center, Camera.main.transform.position);
+            return distance < radius;
+        }
+
+        
     }
 }

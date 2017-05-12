@@ -192,7 +192,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             SurfaceObject? removed = null;
 
             for (int iSurface = 0; iSurface < surfaceObjectsWriteable.Count; iSurface++)
-            {
+            {   
                 SurfaceObject surface = surfaceObjectsWriteable[iSurface];
 
                 if (surface.ID == surfaceID)
@@ -314,19 +314,23 @@ namespace HoloToolkit.Unity.SpatialMapping
 
             var count = surfaceObjectsWriteable.Count - deleteAmount;
             Debug.Log(System.String.Format("{0} surfaces. DELETE {1} surfaces", surfaceObjectsWriteable.Count, count));
-            for (int index = 0; index < count; index++)
+            for (int index = 0; index < surfaceObjectsWriteable.Count; index++)
             {
                 SurfaceObject surface = surfaceObjectsWriteable[index];
+                if (SpatialMappingManager.Instance.isSurfaceNearCamera(surface.Filter.sharedMesh.bounds))
+                {
+                    continue;
+                }
                 if (handlers != null)
                 {
                     handlers(this, DataEventArgs.Create(surface));
                 }
                 CleanUpSurface(surface, destroyGameObjects, destroyMeshes);
-
+                surfaceObjectsWriteable.RemoveAt(index);
             }
             //surfaceObjectsWriteable.Clear();
             /// Remove deleted
-            surfaceObjectsWriteable.RemoveRange(0, count);
+            //surfaceObjectsWriteable.RemoveRange(0, count);
         }
 
 
