@@ -356,9 +356,13 @@ namespace HoloToolkit.Unity.SpatialMapping
                     surfaceAddCount += 1;
                     break;
                 case SurfaceChange.Updated:
-                    surfaceWorkQueue.Enqueue(id);
-                    //Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    UPDATED id: {0}", id));
-                    surfaceUpdateCount += 1;
+                    if (! isSurfaceObsolete(id) || SpatialMappingManager.Instance.isSurfaceNearCamera(bounds))
+                    {
+                        surfaceWorkQueue.Enqueue(id);
+                        //Debug.Log(System.String.Format("SurfaceObserver_OnSurfaceChanged:    UPDATED id: {0}", id));
+                        surfaceUpdateCount += 1;
+
+                    }
                     break;
 
                 case SurfaceChange.Removed:
@@ -408,6 +412,11 @@ namespace HoloToolkit.Unity.SpatialMapping
                 && (surfaceObject.Filter == surfaceData.outputMesh)
                 && (surfaceObject.Collider == surfaceData.outputCollider)
                 ;
+        }
+
+        public bool isSurfaceObsolete(SurfaceId id)
+        {
+            return SpatialMappingManager.Instance.obsoleteSurfaceIds.Contains(id.handle);
         }
     }
 }
