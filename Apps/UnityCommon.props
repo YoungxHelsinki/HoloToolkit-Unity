@@ -2,9 +2,9 @@
     <PropertyGroup>
         <UnityInstallationDir>C:\Program Files\Unity\Editor\</UnityInstallationDir>
         <UnityWSASolutionName>HoloToolkit-Unity</UnityWSASolutionName>
-        <UnityWSASolutionDir>C:\Users\parks1\HoloToolkit-Unity\Apps\</UnityWSASolutionDir>
+        <UnityWSASolutionDir>C:\Users\YOUNG\HoloToolkit-Unity\Apps\</UnityWSASolutionDir>
         <UnityWSAPlayerDir>C:\Program Files\Unity\Editor\Data\PlaybackEngines\MetroSupport\</UnityWSAPlayerDir>
         <UnityWSAToolsDir>$(UnityWSASolutionDir)Unity\Tools\</UnityWSAToolsDir>
-        <UnityProjectDir>C:\Users\parks1\HoloToolkit-Unity\</UnityProjectDir>
+        <UnityProjectDir>C:\Users\YOUNG\HoloToolkit-Unity\</UnityProjectDir>
     </PropertyGroup>
 </Project>
