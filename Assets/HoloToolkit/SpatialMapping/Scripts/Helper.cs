@@ -4,32 +4,33 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Assets.HoloToolkit.SpatialMapping.Scripts
+namespace HoloToolkit.Unity.SpatialMapping
 {
-    public class Helper
+    public static class Helper
     {
         public enum DebugType{ ValueCheck, Weird ,Error}
 
-        public void debug(String line, DebugType type)
+        public static void debug(object msg, DebugType type = DebugType.ValueCheck)
         {
             string msgPrefix = null;
             if (type == DebugType.ValueCheck)
             {
-                msgPrefix = "<color=green>ValueCheck:</color>";
+                msgPrefix = "ValueCheck:\n\t";
             }
             else if (type == DebugType.Weird)
             {
-                msgPrefix = "<color=orange>Weird:</color>";
+                // orange = #ffa500ff
+                msgPrefix = "Something's Weird:\n\t";
             }
             else if (type == DebugType.Error)
             {
-                msgPrefix = "<color=red>Error:</color>";
+                msgPrefix = "Error:\n\t";
             }
 
             if (msgPrefix != null)
             {
-                Debug.Log(msgPrefix);
-                Debug.Log(line)
+                //Debug.Log(msgPrefix);
+                Debug.Log(msgPrefix + msg);
             }
            
         }

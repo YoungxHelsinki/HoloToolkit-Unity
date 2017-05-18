@@ -85,13 +85,16 @@ namespace HoloToolkit.Unity.SpatialMapping
             }
         }
 
+
+
         /// <summary>
         /// Sends the spatial mapping surfaces from the HoloLens to a remote system running the Unity editor.
         /// </summary>
         private void SendMeshes()
         {
 #if !UNITY_EDITOR && UNITY_METRO
-            List<MeshFilter> MeshFilters = SpatialMappingManager.Instance.GetMeshFilters();
+            //List<MeshFilter> MeshFilters = SpatialMappingManager.Instance.GetMeshFilters();
+            List<MeshFilter> MeshFilters = SpatialMappingManager.Instance.GetUnsentMeshFilters();
             for (int index = 0; index < MeshFilters.Count; index++)
             {
                 List<Mesh> meshesToSend = new List<Mesh>();
@@ -114,6 +117,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             }
 
             // SEYOUNG
+            Helper.debug("SendMeshes(): Done serializing. cleanup!");
             SpatialMappingManager.Instance.Cleanup();
 #endif
         }

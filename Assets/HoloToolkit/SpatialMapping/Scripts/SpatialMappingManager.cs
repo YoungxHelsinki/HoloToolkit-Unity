@@ -271,6 +271,27 @@ namespace HoloToolkit.Unity.SpatialMapping
         }
 
         /// <summary>
+        /// Gets all meshes that are associated with the SpatialMapping mesh.
+        /// </summary>
+        /// <returns>
+        /// Collection of Mesh objects representing the SpatialMapping mesh.
+        /// </returns>
+        public List<Mesh> GetUnsentMeshes()
+        {
+            List<Mesh> meshes = new List<Mesh>();
+            List<MeshFilter> meshFilters = GetUnsentMeshFilters();
+
+            // Get all valid mesh filters for observed surfaces.
+            for (int i = 0; i < meshFilters.Count; i++)
+            {
+                // GetMeshFilters ensures that both filter and filter.sharedMesh are not null.
+                meshes.Add(meshFilters[i].sharedMesh);
+            }
+
+            return meshes;
+        }
+
+        /// <summary>
         /// Gets all the surface objects associated with the Spatial Mapping mesh.
         /// </summary>
         /// <returns>Collection of SurfaceObjects.</returns>
@@ -286,6 +307,15 @@ namespace HoloToolkit.Unity.SpatialMapping
         public List<MeshFilter> GetMeshFilters()
         {
             return Source.GetMeshFilters();
+        }
+
+        /// <summary>
+        /// Gets all Mesh Filter objects associated with the Spatial Mapping mesh.
+        /// </summary>
+        /// <returns>Collection of Mesh Filter objects.</returns>
+        public List<MeshFilter> GetUnsentMeshFilters()
+        {
+            return Source.GetUnsentMeshFilters();
         }
 
         /// <summary>
@@ -334,11 +364,17 @@ namespace HoloToolkit.Unity.SpatialMapping
             }
         }
 
-        public bool isSurfaceNearCamera(Bounds bounds, float radius = 0.5F)
+
+        
+
+
+        public bool isSurfaceNearCamera(Bounds bounds, float radius = 0.3F)
         {
             //var distance = Vector3.Distance(bounds.center, Camera.main.transform.position);
             var heading = bounds.center - Camera.main.transform.position;
             var distance = heading.magnitude;
+            var msg = System.String.Format("Distance between mesh and camera: {0}m\nToo near? {1}", distance, distance < radius);
+            Helper.debug(msg, Helper.DebugType.Weird);
             return distance < radius;
         }
 
