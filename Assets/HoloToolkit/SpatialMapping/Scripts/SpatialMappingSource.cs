@@ -124,6 +124,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// <param name="toAdd">The surface to add.</param>
         protected void AddSurfaceObject(SurfaceObject toAdd)
         {
+            Debug.Log("Add new surface obj.");
             surfaceObjectsWriteable.Add(toAdd);
 
             var handlers = SurfaceAdded;
@@ -304,7 +305,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// </summary>
         /// <param name="destroyGameObjects">True to destroy the game objects of each surface, false otherwise.</param>
         /// <param name="destroyMeshes">True to destroy the meshes of each surface, false otherwise.</param>
-        protected void CleanupAfterSend(bool destroyGameObjects = true, bool destroyMeshes = true)
+        protected void CleanupFarAfterSend(bool destroyGameObjects = true, bool destroyMeshes = true)
         {
             
             var handlers = SurfaceRemoved;

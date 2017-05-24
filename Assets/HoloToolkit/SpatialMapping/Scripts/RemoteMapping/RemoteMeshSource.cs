@@ -151,7 +151,7 @@ namespace HoloToolkit.Unity.SpatialMapping
                 {
                     // Write how much data we are sending.
                     networkDataWriter.WriteInt32(nextDataBufferToSend.Length);
-                    Debug.Log(System.String.Format("Buffer length: {0}", nextDataBufferToSend.Length));
+                    //Debug.Log(System.String.Format("Buffer length: {0}", nextDataBufferToSend.Length));
                     // Then write the data.
                     networkDataWriter.WriteBytes(nextDataBufferToSend);
 
